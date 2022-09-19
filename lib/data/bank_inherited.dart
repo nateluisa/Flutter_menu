@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_project2/pages/banks.dart';
+import 'package:flutter_project2/pages/banksNew.dart';
 
 
 class BankInherited extends InheritedWidget { // é um widget de herança, que é responsável por manter informações e as passar para quem precisar.
@@ -9,9 +10,9 @@ class BankInherited extends InheritedWidget { // é um widget de herança, que �
     required Widget child, // parametro obrigatorio
   }) : super(key: key, child: child);
 
-  final List<Banks> BanksList = [Banks('Bradesco', 16548, 15823, banksContext: null,)];
+  final List<BanksNewScreen> BanksList = [BanksNewScreen('Bradesco', 16548, 15823,)];
   void newBanks (String bank, int agency, int account) {
-    BanksList.add(Banks(bank, agency, account, banksContext: null,));
+    BanksList.add(BanksNewScreen(bank, agency, account, banksContext: null,));
   }
 
   static BankInherited of(BuildContext context) { // Aqui é onde você encontra esse método, que pede um contexto e retorna esse objeto

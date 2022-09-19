@@ -3,12 +3,8 @@ import 'package:flutter_project2/components/BankTable.dart';
 import 'package:flutter_project2/pages/banksNew.dart';
 
 class Banks extends StatefulWidget {
-  final bank;
-  final agency;
-  final account;
 
-
-  const Banks(this.bank, this.agency, this.account, {Key? key, required BuildContext banksContext,})
+  const Banks({Key? key, required BuildContext banksContext,})
       : super(key: key);
 
   @override

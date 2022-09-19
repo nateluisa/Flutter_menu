@@ -3,11 +3,14 @@ import 'package:flutter_project2/components/DataTable.dart';
 import 'package:flutter_project2/data/bank_inherited.dart';
 
 class BanksNewScreen extends StatefulWidget {
+  final bank;
+  final agency;
+  final account;
 
 
-  const BanksNewScreen({Key? key, required this.banksNewContext})
+  const BanksNewScreen({Key? key, this.bank, this.agency, this.account, required BuildContext banksNewContext})
       : super(key: key);
-  final BuildContext banksNewContext;
+  
 
   @override
   State<BanksNewScreen> createState() => _BanksNewScreenState();
@@ -38,7 +41,7 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
                       child: GestureDetector(
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
-                            BankInherited.of(widget.banksNewContext).newBanks( // pegou o contexto que foi trazido para o form
+                            BankInherited.of(widget.bank).newBanks( // pegou o contexto que foi trazido para o form
                                 bankController.text,
                                 int.parse(agencyController.text),
                                 int.parse(accountController.text));
