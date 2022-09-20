@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project2/components/DataTable.dart';
-import 'package:flutter_project2/data/bank_inherited.dart';
+import 'package:flutter_project2/model/banks.dart';
+import 'package:flutter_project2/pages/banks.dart';
 
 class BanksNewScreen extends StatefulWidget {
   final bank;
   final agency;
   final account;
 
-
-  const BanksNewScreen({Key? key, this.bank, this.agency, this.account, required BuildContext banksNewContext})
+  const BanksNewScreen(
+      {Key? key,
+      this.bank,
+      this.agency,
+      this.account,
+      required BuildContext banksNewContext})
       : super(key: key);
-  
 
   @override
   State<BanksNewScreen> createState() => _BanksNewScreenState();
 }
 
 class _BanksNewScreenState extends State<BanksNewScreen> {
-  TextEditingController bankController = TextEditingController();
-  TextEditingController agencyController = TextEditingController();
-  TextEditingController accountController = TextEditingController();
+  final TextEditingController _bankController = TextEditingController();
 
+  final TextEditingController _agencyController = TextEditingController();
+
+  final TextEditingController _accountController = TextEditingController();
+
+  // late Bank bank;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -40,18 +46,22 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
                       padding: EdgeInsets.only(right: 20.0),
                       child: GestureDetector(
                         onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            BankInherited.of(widget.bank).newBanks( // pegou o contexto que foi trazido para o form
-                                bankController.text,
-                                int.parse(agencyController.text),
-                                int.parse(accountController.text));
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Novo banco criado'),
-                              ),
-                            );
-                            Navigator.pop(context);
-                          }
+                          print('salvou');
+                          final String name = _bankController.text;
+                          final int account =
+                              int.parse(_accountController.text);
+                          final int agency = int.parse(_agencyController.text);
+                          final Bank newBank = Bank(
+                            0,
+                            name,
+                            agency,
+                            account,
+                          );
+                          Navigator.pop(context, newBank);
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('Criado com Sucesso!'),
+                          ));
                         },
                         child: Icon(Icons.check),
                       ),
@@ -89,7 +99,7 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
                                   children: [
                                     Expanded(
                                       child: TextFormField(
-                                        controller: bankController,
+                                        controller: _bankController,
                                         validator: (String? value) {
                                           if (value != null && value.isEmpty) {
                                             return 'Informe o nome do banco';
@@ -102,7 +112,7 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
                                     ),
                                     Expanded(
                                         child: TextFormField(
-                                      controller: agencyController,
+                                      controller: _agencyController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return 'Informe a agência';
@@ -124,7 +134,7 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
-                                controller: accountController,
+                                controller: _accountController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Informe a conta';
