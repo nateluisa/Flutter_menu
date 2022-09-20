@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project2/dao/banks_dao.dart';
+import 'package:flutter_project2/data/projectDB.dart';
 import 'package:flutter_project2/model/banks.dart';
 import 'package:flutter_project2/pages/banks.dart';
 
@@ -26,6 +28,7 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
 
   final TextEditingController _accountController = TextEditingController();
 
+  final BanksDao _dao = BanksDao();
   // late Bank bank;
   final _formKey = GlobalKey<FormState>();
 
@@ -57,7 +60,12 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
                             agency,
                             account,
                           );
-                          Navigator.pop(context, newBank);
+                          _dao.save(newBank).then((id) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>  BanksScreen(),
+                            ),
+                          ));
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
                             content: Text('Criado com Sucesso!'),
@@ -90,42 +98,40 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
                   ListView(
                     children: [
                       Center(
-                        child: Container(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: TextFormField(
-                                        controller: _bankController,
-                                        validator: (String? value) {
-                                          if (value != null && value.isEmpty) {
-                                            return 'Informe o nome do banco';
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: 'Banco',
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                        child: TextFormField(
-                                      controller: _agencyController,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Informe a agência';
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: _bankController,
+                                      validator: (String? value) {
+                                        if (value != null && value.isEmpty) {
+                                          return 'Informe o nome do banco';
                                         }
                                       },
-                                      decoration: (InputDecoration(
-                                          hintText: 'Agência')),
-                                    ))
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                      decoration: InputDecoration(
+                                        hintText: 'Banco',
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                      child: TextFormField(
+                                    controller: _agencyController,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Informe a agência';
+                                      }
+                                    },
+                                    decoration: (InputDecoration(
+                                        hintText: 'Agência')),
+                                  ))
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       Center(

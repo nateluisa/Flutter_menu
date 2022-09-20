@@ -6,15 +6,16 @@ import 'login_page.dart';
 
 void main() {
   runApp(MyApp());
-  save(Bank(1,'Caixa', 123, 123,));
-
 }
 
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
-    LoginPage.tag: (context) => LoginPage(loginContext: context,),
-    HomePage.tag: (context) => HomePage(homeContext: context,),
-
+    LoginPage.tag: (context) => LoginPage(
+          loginContext: context,
+        ),
+    HomePage.tag: (context) => HomePage(
+          homeContext: context,
+        ),
   };
 
   @override
@@ -31,6 +32,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
