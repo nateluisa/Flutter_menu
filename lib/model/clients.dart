@@ -19,4 +19,16 @@ class Client {
   String toString() {
     return 'Client{id: $id, name: $name, adress: $adress, number: $number, district: $district, telephone: $telephone,}';
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'adress': adress,
+      'number': number,
+      'district': district,
+      'telephone': telephone
+
+    };
+  }
 }
