@@ -126,7 +126,7 @@ class _ClientItem extends StatelessWidget {
                 ),
                 PopupMenuItem<String>(
                   onTap: () {
-                   // _dao.deleteClient0();
+                    _dao.deleteClient(0);
                   },
                   value: '3',
                   child: Text('Excluir'),
