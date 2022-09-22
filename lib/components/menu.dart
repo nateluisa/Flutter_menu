@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project2/components/mainViewHome.dart';
-import 'package:flutter_project2/login_page.dart';
 import 'package:flutter_project2/pages/banks.dart';
 import 'package:flutter_project2/pages/checks.dart';
 import 'package:flutter_project2/pages/clients.dart';
@@ -46,8 +45,8 @@ class _MenuState extends State<Menu> {
                   child: Align(
                     heightFactor: 1,
                     widthFactor: 1,
-                    child: Image.network(
-                        'https://cdn-icons-png.flaticon.com/512/147/147135.png'),
+                    child: Image.asset(
+                        'assets/userlogo.png'),
                   ),
                 ),
                 // onSelected: choiceAction,
@@ -74,7 +73,7 @@ class _MenuState extends State<Menu> {
         ],
         centerTitle: true,
         title: const Text(
-          'Albatros',
+          '',
         ),
         backgroundColor: Colors.blueGrey,
       ),
@@ -84,18 +83,17 @@ class _MenuState extends State<Menu> {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              // <-- SEE HERE
-              decoration: BoxDecoration(
+             decoration: BoxDecoration(
                 color: Colors.blueGrey,
               ),
               accountName: Text(
-                "Albatros mobile",
+                "Mobile project",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               accountEmail: Text(
-                "Move Tecnologia",
+                "Olá, seja bem vindo(a)!",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
