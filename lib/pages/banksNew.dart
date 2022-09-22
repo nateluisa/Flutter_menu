@@ -63,7 +63,8 @@ class _BanksNewScreenState extends State<BanksNewScreen> {
                           _dao.save(newBank).then((id) => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (BuildContext context) =>  BanksScreen(),
+                              builder: (BuildContext context) =>
+                                  BanksScreen(),
                             ),
                           ));
                           ScaffoldMessenger.of(context)

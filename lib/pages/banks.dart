@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project2/dao/banks_dao.dart';
 import 'package:flutter_project2/data/projectDB.dart';
+import 'package:flutter_project2/home_page.dart';
 import 'package:flutter_project2/model/banks.dart';
 import 'package:flutter_project2/pages/banksNew.dart';
 
@@ -21,7 +22,14 @@ class BanksScreen extends StatelessWidget {
         ),
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (contextNew) => HomePage(homeContext: context,
+
+                ),
+              ),
+            );
           },
           child: Icon(
             Icons.arrow_back_outlined, // add custom icons also
@@ -97,7 +105,7 @@ class BanksScreen extends StatelessWidget {
 
 class _BankItem extends StatelessWidget {
   final Bank bank;
-
+  final BanksDao _dao = BanksDao();
   _BankItem(this.bank);
 
   @override
@@ -121,19 +129,18 @@ class _BankItem extends StatelessWidget {
                 ),
                 PopupMenuItem<String>(
                   onTap: () {
-                    SimpleDialog(
-                      title: const Text('Deseja realmente excluir?'),
-                      children: <Widget>[
-                        SimpleDialogOption(
-                          onPressed: () {  },
-                          child: const Text('Sim'),
-                        ),
-                        SimpleDialogOption(
-                          onPressed: () {  },
-                          child: const Text('Não'),
-                        ),
-                      ],
-                    );
+                    print('delete');
+                    _dao.deleteBank(bank.id).then((id) =>
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => BanksScreen(),
+                      ),
+                    ));
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(const SnackBar(
+                      content: Text('Banco deletado!'),
+                    ));
                   },
                   value: '3',
                   child: Text('Excluir'),

@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project2/dao/banks_dao.dart';
 import 'package:flutter_project2/dao/clients_dao.dart';
-import 'package:flutter_project2/model/banks.dart';
 import 'package:flutter_project2/model/clients.dart';
-import 'package:flutter_project2/pages/banks.dart';
 import 'package:flutter_project2/pages/clients.dart';
 
-class ClientsNewScreen extends StatefulWidget {
+class ClientsEditScreen extends StatefulWidget {
   final name;
   final adress;
   final number;
   final district;
   final telephone;
 
-  const ClientsNewScreen(
+  const ClientsEditScreen(
       {Key? key,
-      this.name,
-      this.adress,
-      this.number,
-      this.district,
-      this.telephone,
-      required BuildContext clientsNewContext})
+        this.name,
+        this.adress,
+        this.number,
+        this.district,
+        this.telephone,
+        required BuildContext clientsEditContext})
       : super(key: key);
 
   @override
-  State<ClientsNewScreen> createState() => _ClientsNewScreenState();
+  State<ClientsEditScreen> createState() => _ClientsEditScreenState();
 }
 
-class _ClientsNewScreenState extends State<ClientsNewScreen> {
+class _ClientsEditScreenState extends State<ClientsEditScreen> {
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _adressController = TextEditingController();
@@ -50,40 +47,40 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
             length: 4,
             child: Scaffold(
               appBar: AppBar(
-                title: const Text('Novo cliente'),
+                title: const Text('Editar cliente'),
                 actions: <Widget>[
-                  // Container(
-                  //   child: Padding(
-                  //     padding: EdgeInsets.only(right: 20.0),
-                  //     child: GestureDetector(
-                  //       onTap: () {
-                  //         print('salvou');
-                  //         final String name = _nameController.text;
-                  //         final String adress = _adressController.text;
-                  //         final int number = int.parse(_numberController.text);
-                  //         final String district = _districtController.text;
-                  //         final int telephone =
-                  //             int.parse(_telephoneController.text);
-                  //         final Client newClient = Client(
-                  //             0, name, adress, number, district, telephone);
-                  //         _dao
-                  //             .saveClient(newClient)
-                  //             .then((id) => Navigator.push(
-                  //                   context,
-                  //                   MaterialPageRoute(
-                  //                     builder: (BuildContext context) =>
-                  //                         ClientsScreen(),
-                  //                   ),
-                  //                 ));
-                  //         ScaffoldMessenger.of(context)
-                  //             .showSnackBar(const SnackBar(
-                  //           content: Text('Criado com Sucesso!'),
-                  //         ));
-                  //       },
-                  //       child: Icon(Icons.check),
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          print('salvou');
+                          final String name = _nameController.text;
+                          final String adress = _adressController.text;
+                          final int number = int.parse(_numberController.text);
+                          final String district = _districtController.text;
+                          final int telephone =
+                          int.parse(_telephoneController.text);
+                          final Client newClient = Client(
+                              0, name, adress, number, district, telephone);
+                          _dao
+                              .saveClient(newClient)
+                              .then((id) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ClientsScreen(),
+                            ),
+                          ));
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('Criado com Sucesso!'),
+                          ));
+                        },
+                        child: Icon(Icons.check),
+                      ),
+                    ),
+                  ),
                 ],
                 bottom: const TabBar(
                   tabs: <Widget>[
@@ -105,7 +102,6 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
               body: TabBarView(
                 children: <Widget>[
                   ListView(
-                    padding: EdgeInsets.only(bottom: 85),
                     children: [
                       Center(
                         child: Column(
@@ -129,16 +125,16 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                                   ),
                                   Expanded(
                                       child: TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    controller: _numberController,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Informe o numero';
-                                      }
-                                    },
-                                    decoration:
+                                        keyboardType: TextInputType.number,
+                                        controller: _numberController,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Informe o numero';
+                                          }
+                                        },
+                                        decoration:
                                         (InputDecoration(hintText: 'Numero')),
-                                  ))
+                                      ))
                                 ],
                               ),
                             )
@@ -158,7 +154,7 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                                   }
                                 },
                                 decoration:
-                                    (InputDecoration(hintText: 'Endereço')),
+                                (InputDecoration(hintText: 'Endereço')),
                               ),
                             ),
                             Padding(
@@ -171,7 +167,7 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                                   }
                                 },
                                 decoration:
-                                    (InputDecoration(hintText: 'Bairro')),
+                                (InputDecoration(hintText: 'Bairro')),
                               ),
                             ),
                             Padding(
@@ -185,7 +181,7 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                                   }
                                 },
                                 decoration:
-                                    (InputDecoration(hintText: 'Telefone')),
+                                (InputDecoration(hintText: 'Telefone')),
                               ),
                             )
                           ],
@@ -232,9 +228,9 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                                 ),
                                 Expanded(
                                     child: TextField(
-                                  decoration:
+                                      decoration:
                                       InputDecoration(hintText: 'Teste de input3'),
-                                )),
+                                    )),
                               ],
                             ),
                           )
@@ -259,9 +255,9 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                                 ),
                                 Expanded(
                                     child: TextField(
-                                  decoration: InputDecoration(
-                                      hintText: 'Teste de input 5'),
-                                )),
+                                      decoration: InputDecoration(
+                                          hintText: 'Teste de input 5'),
+                                    )),
                               ],
                             ),
                           )
@@ -270,37 +266,6 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                     ),
                   ),
                 ],
-              ),
-              floatingActionButton: FloatingActionButton(
-                elevation: 2.0,
-                onPressed: () {
-
-                  print('salvou');
-                  final String name = _nameController.text;
-                  final String adress = _adressController.text;
-                  final int number = int.parse(_numberController.text);
-                  final String district = _districtController.text;
-                  final int telephone =
-                  int.parse(_telephoneController.text);
-                  final Client newClient = Client(
-                      0, name, adress, number, district, telephone);
-                  _dao
-                      .saveClient(newClient)
-                      .then((id) => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          ClientsScreen(),
-                    ),
-                  ));
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(const SnackBar(
-                    content: Text('Criado com Sucesso!'),
-                  ));
-
-                },
-                child: Icon(Icons.save),
-                backgroundColor: Colors.blueGrey,
               ),
             )),
       ),

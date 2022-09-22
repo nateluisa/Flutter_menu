@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project2/dao/clients_dao.dart';
+import 'package:flutter_project2/home_page.dart';
 import 'package:flutter_project2/model/clients.dart';
+import 'package:flutter_project2/pages/clientsEdit.dart';
 import 'package:flutter_project2/pages/clientsNew.dart';
 
 class ClientsScreen extends StatelessWidget {
   final ClientsDao _dao = ClientsDao();
 
   ClientsScreen({super.key});
-
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _adressController = TextEditingController();
-  final TextEditingController _numberController = TextEditingController();
-  final TextEditingController _districtController = TextEditingController();
-  final TextEditingController _telephoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +25,15 @@ class ClientsScreen extends StatelessWidget {
         ),
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            //Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (contextNew) => HomePage(homeContext: context,
+                 
+                ),
+              ),
+            );
           },
           child: Icon(
             Icons.arrow_back_outlined, // add custom icons also
@@ -124,16 +128,19 @@ class _ClientItem extends StatelessWidget {
                   value: '1',
                   child: Text('Editar'),
                   onTap: () {
-                    if (client.id != null) {
-                      final existingClient =
-                      _ClientItem(client).((client) => client['id'] == client.id);
-                      _nameController.text = existingClient['name'];
-                      _adressController.text = existingClient['adress'];
-                      _numberController.text = existingClient['number'];
-                      _districtController.text = existingClient['district'];
-                      _telephoneController.text = existingClient['telephone'];
-
-                    }
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (contextNew) => ClientsEditScreen(
+                          clientsEditContext: context,
+                        ),
+                      ),
+                    );
+                    // if (client.id != null) {
+                    //   print('edit');
+                    //
+                    // }
                     _dao.updateClient(client.id, client.name, client.adress, client.number, client.district, client.telephone);
                   },
                 ),
@@ -144,12 +151,15 @@ class _ClientItem extends StatelessWidget {
                 PopupMenuItem<String>(
                   onTap: () {
                     print('delete');
-                    _dao.deleteClient(client.id).then((id) => Navigator.push(
+                    _dao.deleteClient(client.id)
+                        .then((id) =>
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (BuildContext context) => ClientsScreen(),
-                          ),
-                        ));
+                          )
+
+                    ));
                     ScaffoldMessenger.of(context)
                         .showSnackBar(const SnackBar(
                       content: Text('Cliente deletado!'),

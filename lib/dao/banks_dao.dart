@@ -43,11 +43,13 @@ class BanksDao {
     );
   }
 
-  Future<int> delete(Bank bank) async {
-    var instance;
-    final db = await instance.database;
-    return db.update (
+  Future<void> deleteBank(int id) async {
+    final db = await createDatabase();
 
+    await db.delete(
+      'banks',
+      where: 'id = ?',
+      whereArgs: [id],
     );
   }
 }
