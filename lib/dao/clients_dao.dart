@@ -35,15 +35,24 @@ class ClientsDao {
     return clients;
   }
 
-  Future<void> updateClient(Client client) async {
+
+  Future<int> updateClient(int id, String name, String adress, int number, String district, int telephone ) async {
     final db = await createDatabase();
-    await db.update(
-      'clients',
-      client.toMap(),
-      where: 'id = ?',
-      whereArgs: [client.id],
-    );
+
+    final data = {
+      'name': name,
+      'adress': adress,
+      'number': number,
+      'district': district,
+      'telephone': telephone,
+     // 'createdAt': DateTime.now().toString()
+    };
+
+    final result =
+    await db.update('clients', data, where: "id = ?", whereArgs: [id]);
+    return result;
   }
+
 
   Future<void> deleteClient(int id) async {
     final db = await createDatabase();

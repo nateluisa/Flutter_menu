@@ -28,7 +28,7 @@ class ClientsNewScreen extends StatefulWidget {
 }
 
 class _ClientsNewScreenState extends State<ClientsNewScreen> {
-
+  final TextEditingController _idController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _adressController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
@@ -58,6 +58,7 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                       child: GestureDetector(
                         onTap: () {
                           print('salvou');
+                          final int id = int.parse(_idController.text);
                           final String name = _nameController.text;
                           final String adress = _adressController.text;
                           final int number = int.parse(_numberController.text);
@@ -65,7 +66,7 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                           final int telephone =
                               int.parse(_telephoneController.text);
                           final Client newClient = Client(
-                              0, name, adress, number, district, telephone);
+                              id, name, adress, number, district, telephone);
                           _dao
                               .saveClient(newClient)
                               .then((id) => Navigator.push(
@@ -77,7 +78,7 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                                   ));
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
-                            content: Text('Criado com Sucesso!'),
+                            content: Text('Criado com sucesso!'),
                           ));
                         },
                         child: Icon(Icons.check),

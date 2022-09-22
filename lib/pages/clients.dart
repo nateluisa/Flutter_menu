@@ -6,9 +6,13 @@ import 'package:flutter_project2/pages/clientsNew.dart';
 class ClientsScreen extends StatelessWidget {
   final ClientsDao _dao = ClientsDao();
 
-
-
   ClientsScreen({super.key});
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _adressController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _districtController = TextEditingController();
+  final TextEditingController _telephoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +123,19 @@ class _ClientItem extends StatelessWidget {
                 PopupMenuItem<String>(
                   value: '1',
                   child: Text('Editar'),
+                  onTap: () {
+                    if (client.id != null) {
+                      final existingClient =
+                      _ClientItem(client).((client) => client['id'] == client.id);
+                      _nameController.text = existingClient['name'];
+                      _adressController.text = existingClient['adress'];
+                      _numberController.text = existingClient['number'];
+                      _districtController.text = existingClient['district'];
+                      _telephoneController.text = existingClient['telephone'];
+
+                    }
+                    _dao.updateClient(client.id, client.name, client.adress, client.number, client.district, client.telephone);
+                  },
                 ),
                 PopupMenuItem<String>(
                   value: '2',
@@ -126,7 +143,17 @@ class _ClientItem extends StatelessWidget {
                 ),
                 PopupMenuItem<String>(
                   onTap: () {
-                    //_dao.deleteClient(0);
+                    print('delete');
+                    _dao.deleteClient(client.id).then((id) => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => ClientsScreen(),
+                          ),
+                        ));
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(const SnackBar(
+                      content: Text('Cliente deletado!'),
+                    ));
                   },
                   value: '3',
                   child: Text('Excluir'),
