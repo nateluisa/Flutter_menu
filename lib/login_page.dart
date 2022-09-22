@@ -6,6 +6,7 @@ class LoginPage extends StatefulWidget {
 
   const LoginPage({Key? key, required this.loginContext}) : super(key: key);
   final BuildContext loginContext;
+
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
       ),
     );
 
@@ -40,14 +41,13 @@ class _LoginPageState extends State<LoginPage> {
       decoration: InputDecoration(
         hintText: 'Senha',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
       ),
     );
 
     final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
-
         style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll<Color>(
                 Color.fromARGB(255, 79, 101, 113))),

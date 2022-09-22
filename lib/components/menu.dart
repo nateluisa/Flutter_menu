@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project2/components/mainViewHome.dart';
 import 'package:flutter_project2/login_page.dart';
 import 'package:flutter_project2/pages/banks.dart';
 import 'package:flutter_project2/pages/checks.dart';
+import 'package:flutter_project2/pages/clients.dart';
 import 'package:flutter_project2/pages/payment.dart';
 import 'package:flutter_project2/pages/receive.dart';
 
@@ -31,13 +33,11 @@ class Menu extends StatefulWidget {
   State<Menu> createState() => _MenuState();
 }
 
-
-
 class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         actions: <Widget>[
           Container(
             width: 60.0,
@@ -83,10 +83,10 @@ class _MenuState extends State<Menu> {
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-             UserAccountsDrawerHeader(
+            UserAccountsDrawerHeader(
               // <-- SEE HERE
-              decoration: BoxDecoration(color: Colors.blueGrey,
-
+              decoration: BoxDecoration(
+                color: Colors.blueGrey,
               ),
               accountName: Text(
                 "Albatros mobile",
@@ -113,6 +113,21 @@ class _MenuState extends State<Menu> {
             ),
             ListTile(
               leading: Icon(
+                Icons.account_box_outlined,
+              ),
+              title: const Text('Clientes'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => ClientsScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
                 Icons.account_balance,
               ),
               title: const Text('Bancos'),
@@ -121,7 +136,7 @@ class _MenuState extends State<Menu> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) =>  BanksScreen(),
+                    builder: (BuildContext context) => BanksScreen(),
                   ),
                 );
               },
@@ -136,7 +151,9 @@ class _MenuState extends State<Menu> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (contextNew) => ChecksScreen(checksContext: context,),
+                    builder: (contextNew) => ChecksScreen(
+                      checksContext: context,
+                    ),
                   ),
                 );
               },
@@ -151,7 +168,9 @@ class _MenuState extends State<Menu> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (contextNew) => PaymentScreen(paymentContext: context,),
+                    builder: (contextNew) => PaymentScreen(
+                      paymentContext: context,
+                    ),
                   ),
                 );
               },
@@ -166,7 +185,9 @@ class _MenuState extends State<Menu> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (contextNew) => ReceiveScreen(receiveContext: context,),
+                    builder: (contextNew) => ReceiveScreen(
+                      receiveContext: context,
+                    ),
                   ),
                 );
               },
@@ -182,12 +203,11 @@ class _MenuState extends State<Menu> {
         ),
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: [
-            SizedBox(
-              height: 50,
-            ),
+            MainViewHome()
           ],
+
         ),
       ),
     );

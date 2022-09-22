@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project2/dao/banks_dao.dart';
-import 'package:flutter_project2/data/projectDB.dart';
-import 'package:flutter_project2/model/banks.dart';
-import 'package:flutter_project2/pages/banksNew.dart';
+import 'package:flutter_project2/dao/clients_dao.dart';
+import 'package:flutter_project2/model/clients.dart';
+import 'package:flutter_project2/pages/clientsNew.dart';
 
-class BanksScreen extends StatelessWidget {
+class ClientsScreen extends StatelessWidget {
+  final ClientsDao _dao = ClientsDao();
 
-  final BanksDao _dao = BanksDao();
+
+
+  ClientsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Colors.white),
         actionsIconTheme:
             IconThemeData(size: 30.0, color: Colors.white, opacity: 10.0),
         backgroundColor: Colors.blueGrey,
         title: Text(
-          "Bancos",
+          "Clientes",
           style: TextStyle(color: Colors.white),
         ),
         leading: GestureDetector(
@@ -37,7 +41,7 @@ class BanksScreen extends StatelessWidget {
         ],
       ),
       body: FutureBuilder(
-        future: _dao.findAll(),
+        future: _dao.findAllClients(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -59,14 +63,14 @@ class BanksScreen extends StatelessWidget {
               break;
             case ConnectionState.done:
               if (snapshot.data != null) {
-                final List<Bank> banks = snapshot.data as List<Bank>;
+                final List<Client> clients = snapshot.data as List<Client>;
                 return ListView.builder(
                   padding: EdgeInsets.only(bottom: 85),
                   itemBuilder: (context, index) {
-                    final Bank bank = banks[index];
-                    return _BankItem(bank);
+                    final Client client = clients[index];
+                    return _ClientItem(client);
                   },
-                  itemCount: banks.length,
+                  itemCount: clients.length,
                 );
               } else {
                 return Center(child: const Text('Sem registros'));
@@ -82,8 +86,8 @@ class BanksScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (contextNew) => BanksNewScreen(
-                banksNewContext: context,
+              builder: (contextNew) => ClientsNewScreen(
+                clientsNewContext: context,
               ),
             ),
           );
@@ -95,10 +99,11 @@ class BanksScreen extends StatelessWidget {
   }
 }
 
-class _BankItem extends StatelessWidget {
-  final Bank bank;
+class _ClientItem extends StatelessWidget {
+  final Client client;
+  final ClientsDao _dao = ClientsDao();
 
-  _BankItem(this.bank);
+  _ClientItem(this.client);
 
   @override
   Widget build(BuildContext context) {
@@ -121,19 +126,7 @@ class _BankItem extends StatelessWidget {
                 ),
                 PopupMenuItem<String>(
                   onTap: () {
-                    SimpleDialog(
-                      title: const Text('Deseja realmente excluir?'),
-                      children: <Widget>[
-                        SimpleDialogOption(
-                          onPressed: () {  },
-                          child: const Text('Sim'),
-                        ),
-                        SimpleDialogOption(
-                          onPressed: () {  },
-                          child: const Text('Não'),
-                        ),
-                      ],
-                    );
+                   // _dao.deleteClient0();
                   },
                   value: '3',
                   child: Text('Excluir'),
@@ -141,11 +134,11 @@ class _BankItem extends StatelessWidget {
               ];
             }),
         title: Text(
-          bank.name,
+          client.name,
           style: TextStyle(fontSize: 18),
         ),
         subtitle: Text(
-          bank.account.toString(),
+          client.adress,
           style: TextStyle(fontSize: 15),
         ),
       ),
