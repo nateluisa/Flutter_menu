@@ -12,12 +12,12 @@ class ClientsEditScreen extends StatefulWidget {
 
   const ClientsEditScreen(
       {Key? key,
-        this.name,
-        this.adress,
-        this.number,
-        this.district,
-        this.telephone,
-        required BuildContext clientsEditContext})
+      this.name,
+      this.adress,
+      this.number,
+      this.district,
+      this.telephone,
+      required BuildContext clientsEditContext})
       : super(key: key);
 
   @override
@@ -25,7 +25,6 @@ class ClientsEditScreen extends StatefulWidget {
 }
 
 class _ClientsEditScreenState extends State<ClientsEditScreen> {
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _adressController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
@@ -60,18 +59,18 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
                           final int number = int.parse(_numberController.text);
                           final String district = _districtController.text;
                           final int telephone =
-                          int.parse(_telephoneController.text);
+                              int.parse(_telephoneController.text);
                           final Client newClient = Client(
                               0, name, adress, number, district, telephone);
                           _dao
                               .saveClient(newClient)
                               .then((id) => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  ClientsScreen(),
-                            ),
-                          ));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          ClientsScreen(),
+                                    ),
+                                  ));
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
                             content: Text('Criado com Sucesso!'),
@@ -125,16 +124,16 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
                                   ),
                                   Expanded(
                                       child: TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        controller: _numberController,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return 'Informe o numero';
-                                          }
-                                        },
-                                        decoration:
+                                    keyboardType: TextInputType.number,
+                                    controller: _numberController,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Informe o numero';
+                                      }
+                                    },
+                                    decoration:
                                         (InputDecoration(hintText: 'Numero')),
-                                      ))
+                                  ))
                                 ],
                               ),
                             )
@@ -154,7 +153,7 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
                                   }
                                 },
                                 decoration:
-                                (InputDecoration(hintText: 'Endereço')),
+                                    (InputDecoration(hintText: 'Endereço')),
                               ),
                             ),
                             Padding(
@@ -167,7 +166,7 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
                                   }
                                 },
                                 decoration:
-                                (InputDecoration(hintText: 'Bairro')),
+                                    (InputDecoration(hintText: 'Bairro')),
                               ),
                             ),
                             Padding(
@@ -181,7 +180,7 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
                                   }
                                 },
                                 decoration:
-                                (InputDecoration(hintText: 'Telefone')),
+                                    (InputDecoration(hintText: 'Telefone')),
                               ),
                             )
                           ],
@@ -228,9 +227,9 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
                                 ),
                                 Expanded(
                                     child: TextField(
-                                      decoration:
-                                      InputDecoration(hintText: 'Teste de input3'),
-                                    )),
+                                  decoration: InputDecoration(
+                                      hintText: 'Teste de input3'),
+                                )),
                               ],
                             ),
                           )
@@ -255,9 +254,9 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
                                 ),
                                 Expanded(
                                     child: TextField(
-                                      decoration: InputDecoration(
-                                          hintText: 'Teste de input 5'),
-                                    )),
+                                  decoration: InputDecoration(
+                                      hintText: 'Teste de input 5'),
+                                )),
                               ],
                             ),
                           )

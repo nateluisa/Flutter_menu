@@ -3,6 +3,8 @@ import 'package:flutter_project2/model/clients.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class ClientsDao {
+  static final String tableClients = 'clients';
+
   static final String tableSql = 'CREATE TABLE clients('
       'id INTEGER PRIMARY KEY, '
       'name TEXT, '
@@ -37,33 +39,16 @@ class ClientsDao {
     return clients;
   }
 
-  // Future<int> updateClient(int id, String name, String adress, int number, String district, int telephone ) async {
-  //   final db = await createDatabase();
-  //
-  //   final data = {
-  //     'name': name,
-  //     'adress': adress,
-  //     'number': number,
-  //     'district': district,
-  //     'telephone': telephone,
-  //    // 'createdAt': DateTime.now().toString()
-  //   };
-  //
-  //   final result =
-  //   await db.update('clients', data, where: "id = ?", whereArgs: [id]);
-  //   return result;
-  // }
-
   Future<void> updateClient(Client client) async {
     final db = await createDatabase();
     await db.update(
-      tableSql,
+      tableClients,
       client.toMap(),
       where: 'id = ?',
       whereArgs: [client.id],
     );
-    return;
   }
+
 
   Future<void> deleteClient(int id) async {
     final db = await createDatabase();
