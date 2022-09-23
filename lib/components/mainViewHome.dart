@@ -5,6 +5,7 @@ class MainViewHome extends StatelessWidget {
     super.key,
   });
 
+
   @override
   Widget build(context) {
     return SizedBox(
@@ -13,7 +14,6 @@ class MainViewHome extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           padding: EdgeInsets.only(bottom: 85),
-
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -36,7 +36,7 @@ class MainViewHome extends StatelessWidget {
                       child: Center(
                           child: Text(
                             'Total de compras',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           )),
                     ),
                   ),
@@ -58,7 +58,7 @@ class MainViewHome extends StatelessWidget {
                       child: Center(
                           child: Text(
                             'Total de contas a receber',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           )),
                     ),
                   ),
@@ -80,7 +80,7 @@ class MainViewHome extends StatelessWidget {
                       child: Center(
                           child: Text(
                             'Total de cheques emitidos',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           )),
                     ),
                   ),
@@ -102,7 +102,7 @@ class MainViewHome extends StatelessWidget {
                       child: Center(
                           child: Text(
                             'Total de vendas',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           )),
                     ),
                   ),
@@ -124,7 +124,7 @@ class MainViewHome extends StatelessWidget {
                       child: Center(
                           child: Text(
                             'Total de produtos',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           )),
                     ),
                   ),
@@ -146,7 +146,7 @@ class MainViewHome extends StatelessWidget {
                       child: Center(
                           child: Text(
                             'Total de clientes',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           )),
                     ),
                   ),

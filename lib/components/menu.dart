@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project2/components/mainViewHome.dart';
+import 'package:flutter_project2/login_page.dart';
 import 'package:flutter_project2/pages/banks.dart';
 import 'package:flutter_project2/pages/checks.dart';
 import 'package:flutter_project2/pages/clients.dart';
@@ -45,8 +46,7 @@ class _MenuState extends State<Menu> {
                   child: Align(
                     heightFactor: 1,
                     widthFactor: 1,
-                    child: Image.asset(
-                        'assets/userlogo.png'),
+                    child: Image.asset('assets/userlogo.png'),
                   ),
                 ),
                 // onSelected: choiceAction,
@@ -83,7 +83,7 @@ class _MenuState extends State<Menu> {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-             decoration: BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.blueGrey,
               ),
               accountName: Text(
@@ -202,10 +202,7 @@ class _MenuState extends State<Menu> {
       ),
       body: Center(
         child: ListView(
-          children: [
-            MainViewHome()
-          ],
-
+          children: [MainViewHome()],
         ),
       ),
     );

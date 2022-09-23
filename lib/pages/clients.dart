@@ -4,6 +4,7 @@ import 'package:flutter_project2/home_page.dart';
 import 'package:flutter_project2/model/clients.dart';
 import 'package:flutter_project2/pages/clientsEdit.dart';
 import 'package:flutter_project2/pages/clientsNew.dart';
+import 'package:flutter_project2/pages/clientsView.dart';
 
 class ClientsScreen extends StatelessWidget {
   final ClientsDao _dao = ClientsDao();
@@ -29,8 +30,8 @@ class ClientsScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (contextNew) => HomePage(homeContext: context,
-                 
+                builder: (contextNew) => HomePage(
+                  homeContext: context,
                 ),
               ),
             );
@@ -128,40 +129,37 @@ class _ClientItem extends StatelessWidget {
                   value: '1',
                   child: Text('Editar'),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (contextNew) => ClientsEditScreen(
-                          clientsEditContext: context,
-                        ),
-                      ),
-                    );
-                    // if (client.id != null) {
-                    //   print('edit');
-                    //
-                    // }
-                    _dao.updateClient(client.id, client.name, client.adress, client.number, client.district, client.telephone);
+                    if (client.id != null) {
+                      _dao.updateClient(client).then((id) => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                ClientsEditScreen(clientsEditContext: context),
+                          )));
+                    }
                   },
                 ),
                 PopupMenuItem<String>(
                   value: '2',
+                  onTap: () {
+                    _dao.updateClient(client).then((id) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              ClientsViewScreen(clientsViewContext: context),
+                        )));
+                  },
                   child: Text('Visualizar'),
                 ),
                 PopupMenuItem<String>(
                   onTap: () {
                     print('delete');
-                    _dao.deleteClient(client.id)
-                        .then((id) =>
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => ClientsScreen(),
-                          )
-
-                    ));
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(const SnackBar(
+                    _dao.deleteClient(client.id).then((id) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => ClientsScreen(),
+                        )));
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Cliente deletado!'),
                     ));
                   },

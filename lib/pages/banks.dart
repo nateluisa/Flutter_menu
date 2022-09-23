@@ -112,6 +112,7 @@ class _BankItem extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Card(
+
       elevation: 3,
       shadowColor: Colors.blueGrey,
       child: ListTile(

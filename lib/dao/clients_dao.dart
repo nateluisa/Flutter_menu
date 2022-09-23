@@ -11,6 +11,8 @@ class ClientsDao {
       'district TEXT, '
       'telephone INTERGER)';
 
+
+
   Future<int> saveClient(Client client) async {
     final Database db = await createDatabase();
     final Map<String, dynamic> clientMap = {};
@@ -35,24 +37,33 @@ class ClientsDao {
     return clients;
   }
 
+  // Future<int> updateClient(int id, String name, String adress, int number, String district, int telephone ) async {
+  //   final db = await createDatabase();
+  //
+  //   final data = {
+  //     'name': name,
+  //     'adress': adress,
+  //     'number': number,
+  //     'district': district,
+  //     'telephone': telephone,
+  //    // 'createdAt': DateTime.now().toString()
+  //   };
+  //
+  //   final result =
+  //   await db.update('clients', data, where: "id = ?", whereArgs: [id]);
+  //   return result;
+  // }
 
-  Future<int> updateClient(int id, String name, String adress, int number, String district, int telephone ) async {
+  Future<void> updateClient(Client client) async {
     final db = await createDatabase();
-
-    final data = {
-      'name': name,
-      'adress': adress,
-      'number': number,
-      'district': district,
-      'telephone': telephone,
-     // 'createdAt': DateTime.now().toString()
-    };
-
-    final result =
-    await db.update('clients', data, where: "id = ?", whereArgs: [id]);
-    return result;
+    await db.update(
+      tableSql,
+      client.toMap(),
+      where: 'id = ?',
+      whereArgs: [client.id],
+    );
+    return;
   }
-
 
   Future<void> deleteClient(int id) async {
     final db = await createDatabase();
@@ -63,4 +74,6 @@ class ClientsDao {
       whereArgs: [id],
     );
   }
+
+
 }

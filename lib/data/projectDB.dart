@@ -1,6 +1,5 @@
 import 'package:flutter_project2/dao/banks_dao.dart';
 import 'package:flutter_project2/dao/clients_dao.dart';
-import 'package:flutter_project2/model/banks.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
