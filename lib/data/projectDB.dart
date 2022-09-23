@@ -15,7 +15,7 @@ Future<Database> createDatabase() async {
       await db.execute(BanksDao.tableSql);
     },
     version: 1,
-    // onDowngrade: onDatabaseDowngradeDelete  //, para limpeza do banco faça upgrade em +1 na versao + hot restart logo depois volte 1 versao e comente esse trecho novamente + hot restart
+    //onDowngrade: onDatabaseDowngradeDelete  //, para limpeza do banco faça upgrade em +1 na versao + hot restart logo depois volte 1 versao e comente esse trecho novamente + hot restart
   );
 }
 
