@@ -60,10 +60,10 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
                           final String district = _districtController.text;
                           final int telephone =
                               int.parse(_telephoneController.text);
-                          final Client newClient = Client(
+                          final Client editedClient = Client(
                               0, name, adress, number, district, telephone);
                           _dao
-                              .saveClient(newClient)
+                              .saveClient(editedClient)
                               .then((id) => Navigator.push(
                                     context,
                                     MaterialPageRoute(
