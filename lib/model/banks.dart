@@ -15,4 +15,14 @@ class Bank {
   String toString() {
     return 'Bank{id: $id, name: $name, agency: $agency, account: $account}';
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'address': agency,
+      'number': account,
+
+    };
+  }
 }

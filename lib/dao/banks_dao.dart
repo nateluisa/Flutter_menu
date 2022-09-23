@@ -3,11 +3,12 @@ import 'package:flutter_project2/model/banks.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class BanksDao {
+  static final String tableBanks = 'banks';
 
   static final String tableSql = 'CREATE TABLE banks('
       'id INTEGER PRIMARY KEY, '
       'name TEXT, '
-      'agency INTERGER,'
+      'agency INTEGER,'
       'account INTEGER)';
 
   Future<int> save(Bank bank) async {
@@ -35,11 +36,13 @@ class BanksDao {
 
   }
 
-  Future<int> update(Bank bank) async {
-      var instance;
-      final db = await instance.database;
-    return db.update (
-
+  Future<void> updateBank(Bank bank) async {
+    final db = await createDatabase();
+    await db.update(
+      tableBanks,
+      bank.toMap(),
+      where: 'id = ?',
+      whereArgs: [bank.id],
     );
   }
 

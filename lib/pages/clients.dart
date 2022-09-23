@@ -173,7 +173,7 @@ class _ClientItem extends StatelessWidget {
           style: TextStyle(fontSize: 18),
         ),
         subtitle: Text(
-          client.adress,
+          client.address,
           style: TextStyle(fontSize: 15),
         ),
       ),

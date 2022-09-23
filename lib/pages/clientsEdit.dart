@@ -33,8 +33,11 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
 
   final ClientsDao _dao = ClientsDao();
 
-  // late Bank bank;
   final _formKey = GlobalKey<FormState>();
+
+  // String? _mandatoryValidator(String text) {
+  //   return (text.isEmpty ?? true) ? 'Required' : null;
+  // }
 
   @override
   Widget build(BuildContext context) {

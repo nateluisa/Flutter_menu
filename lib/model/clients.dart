@@ -1,7 +1,7 @@
 class Client {
   final int id;
   final String name;
-  final String adress;
+  final String address;
   final int number;
   final String district;
   final int telephone;
@@ -9,7 +9,7 @@ class Client {
   Client(
     this.id,
     this.name,
-    this.adress,
+    this.address,
     this.number,
     this.district,
     this.telephone,
@@ -17,14 +17,14 @@ class Client {
 
   @override
   String toString() {
-    return 'Client{id: $id, name: $name, adress: $adress, number: $number, district: $district, telephone: $telephone,}';
+    return 'Client{id: $id, name: $name, adress: $address, number: $number, district: $district, telephone: $telephone,}';
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
-      'adress': adress,
+      'address': address,
       'number': number,
       'district': district,
       'telephone': telephone
