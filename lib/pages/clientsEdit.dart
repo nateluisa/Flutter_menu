@@ -14,12 +14,12 @@ class ClientsEditScreen extends StatefulWidget {
 
   const ClientsEditScreen(
       {Key? key,
-        this.name,
-        this.adress,
-        this.number,
-        this.district,
-        this.telephone,
-        required BuildContext clientsEditContext})
+      this.name,
+      this.adress,
+      this.number,
+      this.district,
+      this.telephone,
+      required BuildContext clientsEditContext})
       : super(key: key);
 
   @override
@@ -28,9 +28,6 @@ class ClientsEditScreen extends StatefulWidget {
 
 class _ClientsEditScreenState extends State<ClientsEditScreen> {
 
-
-
-  late Client client;
 
   // String? _mandatoryValidator(String text) {
   //   return (text.isEmpty ?? true) ? 'Required' : null;
@@ -45,7 +42,7 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
         automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Colors.white),
         actionsIconTheme:
-        IconThemeData(size: 30.0, color: Colors.white, opacity: 10.0),
+            IconThemeData(size: 30.0, color: Colors.white, opacity: 10.0),
         backgroundColor: Colors.blueGrey,
         title: Text(
           "Clientes",
@@ -99,27 +96,26 @@ class _ClientsEditScreenState extends State<ClientsEditScreen> {
               // TODO: Handle this case.
               break;
             case ConnectionState.done:
-    if (snapshot.data != null) {
-      final List<Client> clients = snapshot.data as List<Client>;
-      return ListView.builder(
-        padding: EdgeInsets.only(bottom: 85),
-        itemBuilder: (context, index) {
-          final Client client = clients[index];
-          return _ClientItem(client);
-        },
-        itemCount: clients.length,
-      );
-    }
-    else {
-      return Center(child: const Text('Ocorreu um erro ao buscar os dados'));
-    }
+              //if (snapshot.data != null) {
+                final List<Client> clients = snapshot.data as List<Client>;
+                return ListView.builder(
+                  padding: EdgeInsets.only(bottom: 85),
+                  itemBuilder: (context, index) {
+                    final Client client = clients[index];
+                    return _ClientItem(client);
+                  },
+                  itemCount: clients.length,
+                );
+              // } else {
+              //   return Center(
+              //       child: const Text('Sem dados'));
+              // }
               break;
           }
-
+          return Text('Erro ao realizar carregamento');
         },
       ),
     );
-
   }
 }
 
@@ -132,10 +128,8 @@ class _ClientItem extends StatelessWidget {
   final TextEditingController _districtController = TextEditingController();
   final TextEditingController _telephoneController = TextEditingController();
 
-
-
-
   _ClientItem(this.client);
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -161,18 +155,18 @@ class _ClientItem extends StatelessWidget {
                         final int number = int.parse(_numberController.text);
                         final String district = _districtController.text;
                         final int telephone =
-                        int.parse(_telephoneController.text);
+                            int.parse(_telephoneController.text);
                         final Client editedClient = Client(
                             0, name, adress, number, district, telephone);
                         _dao
                             .saveClient(editedClient)
                             .then((id) => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                ClientsScreen(),
-                          ),
-                        ));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ClientsScreen(),
+                                  ),
+                                ));
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text('Criado com Sucesso!'),
@@ -212,6 +206,7 @@ class _ClientItem extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: TextFormField(
+                                      initialValue: client.name,
                                       controller: _nameController,
                                       validator: (String? value) {
                                         if (value != null && value.isEmpty) {
@@ -226,19 +221,18 @@ class _ClientItem extends StatelessWidget {
                                   ),
                                   Expanded(
                                       child: TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        controller: _numberController,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return 'Informe o numero';
-                                          }
-                                          return null;
-                                        },
-                                        decoration:
-                                        (const InputDecoration(hintText: 'Numero')),
-                                      ))
-
-
+                                    keyboardType: TextInputType.number,
+                                    //initialValue: client.number,
+                                    controller: _numberController,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Informe o numero';
+                                      }
+                                      return null;
+                                    },
+                                    decoration: (const InputDecoration(
+                                        hintText: 'Numero')),
+                                  ))
                                 ],
                               ),
                             )
@@ -251,6 +245,7 @@ class _ClientItem extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
+                                initialValue: client.adress,
                                 controller: _adressController,
                                 validator: (value) {
                                   if (value != null && value.isEmpty) {
@@ -258,13 +253,14 @@ class _ClientItem extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                decoration:
-                                (const InputDecoration(hintText: 'Endereço')),
+                                decoration: (const InputDecoration(
+                                    hintText: 'Endereço')),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
+                                initialValue: client.district,
                                 controller: _districtController,
                                 validator: (value) {
                                   if (value != null && value.isEmpty) {
@@ -273,12 +269,13 @@ class _ClientItem extends StatelessWidget {
                                   return null;
                                 },
                                 decoration:
-                                (const InputDecoration(hintText: 'Bairro')),
+                                    (const InputDecoration(hintText: 'Bairro')),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
+                                //initialValue: toString(client.telephone),
                                 keyboardType: TextInputType.phone,
                                 controller: _telephoneController,
                                 validator: (value) {
@@ -287,8 +284,8 @@ class _ClientItem extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                decoration:
-                                (const InputDecoration(hintText: 'Telefone')),
+                                decoration: (const InputDecoration(
+                                    hintText: 'Telefone')),
                               ),
                             )
                           ],
@@ -332,9 +329,9 @@ class _ClientItem extends StatelessWidget {
                               ),
                               Expanded(
                                   child: TextField(
-                                    decoration: InputDecoration(
-                                        hintText: 'Teste de input3'),
-                                  )),
+                                decoration: InputDecoration(
+                                    hintText: 'Teste de input3'),
+                              )),
                             ],
                           ),
                         )
@@ -357,9 +354,9 @@ class _ClientItem extends StatelessWidget {
                               ),
                               Expanded(
                                   child: TextField(
-                                    decoration: InputDecoration(
-                                        hintText: 'Teste de input 5'),
-                                  )),
+                                decoration: InputDecoration(
+                                    hintText: 'Teste de input 5'),
+                              )),
                             ],
                           ),
                         )
