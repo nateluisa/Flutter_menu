@@ -51,40 +51,6 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
             child: Scaffold(
               appBar: AppBar(
                 title: const Text('Novo cliente'),
-                actions: <Widget>[
-                  // Container(
-                  //   child: Padding(
-                  //     padding: EdgeInsets.only(right: 20.0),
-                  //     child: GestureDetector(
-                  //       onTap: () {
-                  //         print('salvou');
-                  //         final String name = _nameController.text;
-                  //         final String adress = _adressController.text;
-                  //         final int number = int.parse(_numberController.text);
-                  //         final String district = _districtController.text;
-                  //         final int telephone =
-                  //             int.parse(_telephoneController.text);
-                  //         final Client newClient = Client(
-                  //             0, name, adress, number, district, telephone);
-                  //         _dao
-                  //             .saveClient(newClient)
-                  //             .then((id) => Navigator.push(
-                  //                   context,
-                  //                   MaterialPageRoute(
-                  //                     builder: (BuildContext context) =>
-                  //                         ClientsScreen(),
-                  //                   ),
-                  //                 ));
-                  //         ScaffoldMessenger.of(context)
-                  //             .showSnackBar(const SnackBar(
-                  //           content: Text('Criado com Sucesso!'),
-                  //         ));
-                  //       },
-                  //       child: Icon(Icons.check),
-                  //     ),
-                  //   ),
-                  // ),
-                ],
                 bottom: const TabBar(
                   tabs: <Widget>[
                     Tab(
