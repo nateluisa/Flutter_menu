@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project2/components/progress.dart';
 import 'package:flutter_project2/dao/clients_dao.dart';
 import 'package:flutter_project2/home_page.dart';
 import 'package:flutter_project2/model/clients.dart';
@@ -57,16 +58,7 @@ class ClientsScreen extends StatelessWidget {
               // TODO: Handle this case.
               break;
             case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const <Widget>[
-                    CircularProgressIndicator(),
-                    Text('Carregando'),
-                  ],
-                ),
-              );
+              return Progress();
               break;
             case ConnectionState.active:
               break;
@@ -106,7 +98,7 @@ class ClientsScreen extends StatelessWidget {
   }
 }
 
-class _ClientItem extends StatelessWidget {
+class _ClientItem extends StatelessWidget { // widget privado que fara parte apenas da tela cliente - lista
   final Client client;
   final ClientsDao _dao = ClientsDao();
 

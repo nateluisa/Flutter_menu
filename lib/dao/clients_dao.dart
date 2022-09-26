@@ -2,6 +2,8 @@ import 'package:flutter_project2/data/projectDB.dart';
 import 'package:flutter_project2/model/clients.dart';
 import 'package:sqflite/sqlite_api.dart';
 
+import '../model/banks.dart';
+
 class ClientsDao {
   static const String tableClients = 'clients';
 
@@ -68,3 +70,6 @@ class ClientsDao {
     );
   }
 }
+
+
+

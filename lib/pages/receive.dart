@@ -14,70 +14,114 @@ class ReceiveScreen extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
         ),
-        home: const HomePage());
+        home: GFG());
   }
 }
 
 // Home Page
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class GFG extends StatefulWidget {
+  const GFG({Key? key}) : super(key: key);
 
+  @override
+  State<GFG> createState() => _GFGState();
+}
+
+class _GFGState extends State<GFG> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contas a receber'),
+        title: const Text(
+          "Contas a receber",
+        ),
         actions: [
-          // Navigate to the Search Screen
           IconButton(
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => const SearchPage())),
-              icon: const Icon(Icons.search)),
-          IconButton(
-            icon: const Icon(Icons.menu),
             onPressed: () {
-
+              // method to show the search bar
+              showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate()
+              );
             },
-          ),
-          IconButton(
-             onPressed: () {
-              // Navigator.pop(context);
-             },
-              icon: const Icon(Icons.arrow_back_outlined)),
+            icon: const Icon(Icons.search),
+          )
         ],
       ),
     );
   }
 }
 
-// Search Page
-class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key}) : super(key: key);
+class CustomSearchDelegate extends SearchDelegate {
+  List<String> searchTerms = [
+    "Apple",
+    "Banana",
+    "Mango",
+    "Pear",
+    "Watermelons",
+    "Blueberries",
+    "Pineapples",
+    "Strawberries"
+  ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Container(
-        width: double.infinity,
-        height: 40,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(5)),
-        child: Center(
-          child: TextField(
-            decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    // codigo para limpar seleçao do campo
-                  },
-                ),
-                hintText: 'Buscar...',
-                border: InputBorder.none),
-          ),
-        ),
-      )),
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          query = '';
+        },
+        icon: Icon(Icons.clear),
+      ),
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        close(context, null);
+      },
+      icon: Icon(Icons.arrow_back),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> matchQuery = [];
+    for (var fruit in searchTerms) {
+      if (fruit.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(fruit);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+          title: Text(result),
+        );
+      },
+    );
+  }
+
+  // last overwrite to show the
+  // querying process at the runtime
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> matchQuery = [];
+    for (var fruit in searchTerms) {
+      if (fruit.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(fruit);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+          title: Text(result),
+        );
+      },
     );
   }
 }
