@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project2/dao/clients_dao.dart';
+import 'package:flutter_project2/model/clients.dart';
+import 'package:flutter_project2/pages/clients.dart';
 
 class ClientsViewScreen extends StatefulWidget {
-  final name;
-  final adress;
-  final number;
-  final district;
-  final telephone;
+  final Client client;
 
   const ClientsViewScreen(
       {Key? key,
-        this.name,
-        this.adress,
-        this.number,
-        this.district,
-        this.telephone,
-        required BuildContext clientsViewContext})
+      required this.client,
+      required BuildContext clientsViewContext})
       : super(key: key);
 
   @override
@@ -23,7 +17,6 @@ class ClientsViewScreen extends StatefulWidget {
 }
 
 class _ClientsViewScreenState extends State<ClientsViewScreen> {
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _adressController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
@@ -37,6 +30,11 @@ class _ClientsViewScreenState extends State<ClientsViewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _nameController.text = widget.client.name;
+    _adressController.text = widget.client.adress;
+    _districtController.text = widget.client.district;
+    _numberController.text = widget.client.number.toString();
+    _telephoneController.text = widget.client.telephone.toString();
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -78,6 +76,11 @@ class _ClientsViewScreenState extends State<ClientsViewScreen> {
                                     child: TextFormField(
                                       readOnly: true,
                                       controller: _nameController,
+                                      validator: (String? value) {
+                                        if (value != null && value.isEmpty) {
+                                          return 'Informe o nome';
+                                        }
+                                      },
                                       decoration: InputDecoration(
                                         hintText: 'Nome',
                                       ),
@@ -85,12 +88,17 @@ class _ClientsViewScreenState extends State<ClientsViewScreen> {
                                   ),
                                   Expanded(
                                       child: TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        controller: _numberController,
-                                        readOnly: true,
-                                        decoration:
+                                    readOnly: true,
+                                    keyboardType: TextInputType.number,
+                                    controller: _numberController,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Informe o numero';
+                                      }
+                                    },
+                                    decoration:
                                         (InputDecoration(hintText: 'Numero')),
-                                      ))
+                                  ))
                                 ],
                               ),
                             )
@@ -103,29 +111,44 @@ class _ClientsViewScreenState extends State<ClientsViewScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
+                                readOnly: true,
                                 controller: _adressController,
-                                readOnly: true,
+                                validator: (value) {
+                                  if (value != null && value.isEmpty) {
+                                    return 'Informe o endereço';
+                                  }
+                                },
                                 decoration:
-                                (InputDecoration(hintText: 'Endereço')),
+                                    (InputDecoration(hintText: 'Endereço')),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
+                                readOnly: true,
                                 controller: _districtController,
-                                readOnly: true,
+                                validator: (value) {
+                                  if (value != null && value.isEmpty) {
+                                    return 'Informe o bairro';
+                                  }
+                                },
                                 decoration:
-                                (InputDecoration(hintText: 'Bairro')),
+                                    (InputDecoration(hintText: 'Bairro')),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
+                                readOnly: true,
                                 keyboardType: TextInputType.phone,
                                 controller: _telephoneController,
-                                readOnly: true,
+                                validator: (value) {
+                                  if (value != null && value.isEmpty) {
+                                    return 'Informe o telefone';
+                                  }
+                                },
                                 decoration:
-                                (InputDecoration(hintText: 'Telefone')),
+                                    (InputDecoration(hintText: 'Telefone')),
                               ),
                             )
                           ],
@@ -172,9 +195,9 @@ class _ClientsViewScreenState extends State<ClientsViewScreen> {
                                 ),
                                 Expanded(
                                     child: TextField(
-                                      decoration:
-                                      InputDecoration(hintText: 'Teste de input3'),
-                                    )),
+                                  decoration: InputDecoration(
+                                      hintText: 'Teste de input3'),
+                                )),
                               ],
                             ),
                           )
@@ -199,9 +222,9 @@ class _ClientsViewScreenState extends State<ClientsViewScreen> {
                                 ),
                                 Expanded(
                                     child: TextField(
-                                      decoration: InputDecoration(
-                                          hintText: 'Teste de input 5'),
-                                    )),
+                                  decoration: InputDecoration(
+                                      hintText: 'Teste de input 5'),
+                                )),
                               ],
                             ),
                           )

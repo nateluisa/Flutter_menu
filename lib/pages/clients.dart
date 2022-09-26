@@ -16,11 +16,11 @@ class ClientsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         actionsIconTheme:
-            IconThemeData(size: 30.0, color: Colors.white, opacity: 10.0),
+            const IconThemeData(size: 30.0, color: Colors.white, opacity: 10.0),
         backgroundColor: Colors.blueGrey,
-        title: Text(
+        title: const Text(
           "Clientes",
           style: TextStyle(color: Colors.white),
         ),
@@ -36,16 +36,16 @@ class ClientsScreen extends StatelessWidget {
               ),
             );
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_outlined, // add custom icons also
           ),
         ),
         actions: <Widget>[
           Padding(
-              padding: EdgeInsets.only(right: 20.0),
+              padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {},
-                child: Icon(Icons.more_vert),
+                child: const Icon(Icons.more_vert),
               )),
         ],
       ),
@@ -61,7 +61,7 @@ class ClientsScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
+                  children: const <Widget>[
                     CircularProgressIndicator(),
                     Text('Carregando'),
                   ],
@@ -74,19 +74,17 @@ class ClientsScreen extends StatelessWidget {
               if (snapshot.data != null) {
                 final List<Client> clients = snapshot.data as List<Client>;
                 return ListView.builder(
-                  padding: EdgeInsets.only(bottom: 85),
+                  padding: const EdgeInsets.only(bottom: 85),
                   itemBuilder: (context, index) {
                     final Client client = clients[index];
                     return _ClientItem(client);
                   },
                   itemCount: clients.length,
                 );
-              } else {
-                return Center(child: const Text('Sem registros'));
               }
               break;
           }
-          return Text('Erro ao realizar carregamento');
+          return const Text('Erro ao realizar carregamento');
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -101,7 +99,7 @@ class ClientsScreen extends StatelessWidget {
             ),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: Colors.blueGrey,
       ),
     );
@@ -119,37 +117,47 @@ class _ClientItem extends StatelessWidget {
     // TODO: implement build
     return Card(
       elevation: 3,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: Theme.of(context).colorScheme.outline,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+      ),
       shadowColor: Colors.blueGrey,
       child: ListTile(
         trailing: PopupMenuButton<String>(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+            ),
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem<String>(
                   value: '1',
-                  child: Text('Editar'),
+                  child: const Text('Editar'),
                   onTap: () {
-                    if (client.id != null) {
-                      _dao.updateClient(client).then((id) => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                ClientsEditScreen(clientsEditContext: context),
-                          )));
-                    }
+                    _dao.findById(client).then((cli) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => ClientsEditScreen(
+                              client: cli, clientsEditContext: context),
+                        )));
                   },
                 ),
                 PopupMenuItem<String>(
                   value: '2',
                   onTap: () {
-                    _dao.updateClient(client).then((id) => Navigator.push(
+                    _dao.findById(client).then((cli) => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              ClientsViewScreen(clientsViewContext: context),
+                          builder: (BuildContext context) => ClientsViewScreen(
+                              client: cli, clientsViewContext: context),
                         )));
                   },
-                  child: Text('Visualizar'),
+                  child: const Text('Visualizar'),
                 ),
                 PopupMenuItem<String>(
                   onTap: () {
@@ -164,17 +172,17 @@ class _ClientItem extends StatelessWidget {
                     ));
                   },
                   value: '3',
-                  child: Text('Excluir'),
+                  child: const Text('Excluir'),
                 ),
               ];
             }),
         title: Text(
           client.name,
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         subtitle: Text(
           client.adress,
-          style: TextStyle(fontSize: 15),
+          style: const TextStyle(fontSize: 15),
         ),
       ),
     );

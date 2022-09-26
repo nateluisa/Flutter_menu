@@ -261,7 +261,7 @@ class _ClientsNewScreenState extends State<ClientsNewScreen> {
                   ));
                   ScaffoldMessenger.of(context)
                       .showSnackBar(const SnackBar(
-                    content: Text('Criado com Sucesso!'),
+                    content: Text('Criado com sucesso!'),
                   ));
 
                 },

@@ -5,10 +5,10 @@ import 'package:sqflite/sqlite_api.dart';
 class BanksDao {
   static final String tableBanks = 'banks';
 
-  static final String tableSql = 'CREATE TABLE banks('
+  static const String tableSql = 'CREATE TABLE banks('
       'id INTEGER PRIMARY KEY, '
       'name TEXT, '
-      'agency INTEGER,'
+      'agency INTEGER, '
       'account INTEGER)';
 
   Future<int> save(Bank bank) async {
