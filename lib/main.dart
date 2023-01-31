@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_project2/home_page.dart';
+import 'package:flutter_project2/initial_pages/starter_page.dart';
 import 'login_page.dart';
 
 void main() {
@@ -20,11 +21,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Albatros mobile',
+      title: 'Clubs Hamburgueria',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
-        fontFamily: 'Nunito',
+        fontFamily: 'Roboto',
       ),
       home: LoginPage(loginContext: context),
       routes: routes,

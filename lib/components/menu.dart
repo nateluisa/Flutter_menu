@@ -46,7 +46,7 @@ class _MenuState extends State<Menu> {
                   child: Align(
                     heightFactor: 1,
                     widthFactor: 1,
-                    child: Image.asset('assets/userlogo.png'),
+                    child: Image.asset('assets/clubs_logo.png'),
                   ),
                 ),
                 // onSelected: choiceAction,
@@ -75,7 +75,7 @@ class _MenuState extends State<Menu> {
         title: const Text(
           '',
         ),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color.fromARGB(255, 250, 173, 23),
       ),
       drawer: Drawer(
         child: ListView(
@@ -84,10 +84,10 @@ class _MenuState extends State<Menu> {
           children: [
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blueGrey,
+                color: Color.fromARGB(255,250, 173, 23),
               ),
               accountName: Text(
-                "Mobile project",
+                "Clubs Hamburgueria",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -98,7 +98,7 @@ class _MenuState extends State<Menu> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              currentAccountPicture: Image.asset('assets/logo-menu.png'),
+              currentAccountPicture: Image.asset('assets/clubs_logo.png'),
             ),
             ListTile(
               leading: Icon(
@@ -111,9 +111,9 @@ class _MenuState extends State<Menu> {
             ),
             ListTile(
               leading: Icon(
-                Icons.account_box_outlined,
+                Icons.book,
               ),
-              title: const Text('Clientes'),
+              title: const Text('Nosso menu'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -126,9 +126,9 @@ class _MenuState extends State<Menu> {
             ),
             ListTile(
               leading: Icon(
-                Icons.account_balance,
+                Icons.timer,
               ),
-              title: const Text('Bancos'),
+              title: const Text('Acompanhe seu pedido'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -141,9 +141,9 @@ class _MenuState extends State<Menu> {
             ),
             ListTile(
               leading: Icon(
-                Icons.money_sharp,
+                Icons.history,
               ),
-              title: const Text('Cheques'),
+              title: const Text('Historico de pedidos'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -158,9 +158,9 @@ class _MenuState extends State<Menu> {
             ),
             ListTile(
               leading: Icon(
-                Icons.money_off,
+                Icons.account_balance_wallet_outlined,
               ),
-              title: const Text('A pagar'),
+              title: const Text('Programa de pontos'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -173,30 +173,7 @@ class _MenuState extends State<Menu> {
                 );
               },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.attach_money,
-              ),
-              title: const Text('A receber'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (contextNew) => ReceiveScreen(
-                      receiveContext: context,
-                    ),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.settings,
-              ),
-              title: const Text('Configurações'),
-              onTap: () {},
-            ),
+
           ],
         ),
       ),

@@ -7,6 +7,6 @@ class HomePage extends StatelessWidget {
   final BuildContext homeContext;
   @override
   Widget build(BuildContext context) {
-   return Menu(title: 'Albatros');
+   return Menu(title: 'Clubs');
   }
 }
